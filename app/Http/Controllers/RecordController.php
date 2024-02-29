@@ -269,22 +269,64 @@ class RecordController extends Controller
                     break;
                 default:
                     $amountChanged = request('amount') != $record->amount;
-                    $walletsChanged = request('sender') != $record->transfer->sender_wallet || request('receiver') != $record->transfer->receiver_wallet;
+                    $walletsChanged = ($record->transfer && (request('sender') != $record->transfer->sender_wallet || request('receiver') != $record->transfer->receiver_wallet));
+
+                    // $walletsChanged = request('sender') != $record->transfer->sender_wallet || request('receiver') != $record->transfer->receiver_wallet;
                     if (!$amountChanged && !$walletsChanged)
                         return redirect()->back();
+                        $oldSenderBalance = $record->transfer?->sender_balance;
 
-                    $oldSenderBalance = Balance::find($record->transfer->sender_balance);
-                    $oldReceiverBalance = Balance::find($record->transfer->receiver_balance);
+                    // $oldSenderBalance = Balance::find($record->transfer->sender_balance);
+                    $oldReceiverBalance = $record->transfer?->receiver_balance;
+
+                    // $oldReceiverBalance = Balance::find($record->transfer->receiver_balance);
 
                     $senderWallet = Wallet::find(\request('sender'));
                     $receiverWallet = Wallet::find(\request('receiver'));
                     /*800*/
-                    $oldSenderBalance->update(['value' => $oldSenderBalance->value + $record->amount]); //800+200=1000// Return to original state
+                    if ($oldSenderBalance !== null) {
+                        $oldSenderBalance->update(['value' => $oldSenderBalance->value + $record->amount]);
+                    }
+                    
+                    // $oldSenderBalance->update(['value' => $oldSenderBalance->value + $record->amount]); //800+200=1000// Return to original state
                     /*700*/
-                    $oldReceiverBalance->update(['value' => $oldReceiverBalance->value - $record->amount]); //700-200=500 // Return to original state
+                    if ($oldReceiverBalance !== null) {
+                        $oldReceiverBalance->update(['value' => $oldReceiverBalance->value - $record->amount]);
+                    }
+                    
+                    // $oldReceiverBalance->update(['value' => $oldReceiverBalance->value - $record->amount]); //700-200=500 // Return to original state
 
 
-                    $newSenderBalance = $senderWallet->balances()->where('currency_id', \request('currency'))->limit(1)->first();
+                    // Assuming $senderWallet is supposed to be retrieved from the database based on some condition or input
+// Make sure $senderWallet is retrieved successfully before accessing its balances
+
+if ($senderWallet !== null) {
+    $newSenderBalance = $senderWallet->balances()->where('currency_id', request('currency'))->first();
+    
+    if ($newSenderBalance !== null) {
+        // Proceed with the rest of your logic
+    } else {
+        // Handle case when $newSenderBalance is null
+        // This could occur if the sender wallet has no balance for the specified currency
+        // You may want to create a new balance record for this currency
+        $newSenderBalance = new Balance();
+        $newSenderBalance->wallet_id = $senderWallet->id;
+        $newSenderBalance->currency_id = request('currency');
+        $newSenderBalance->value = 0; // or any default value you prefer
+        $newSenderBalance->save();
+        
+        // You can also log this scenario or perform any additional actions
+    }
+} else {
+    // Handle case when $senderWallet is null
+    // This could occur if the sender wallet is not found in the database
+    // You may want to return an error response or redirect the user to an appropriate page
+    
+    // Example:
+    return redirect()->back()->with('error', 'Sender wallet not found.');
+}
+
+                    // $newSenderBalance = $senderWallet->balances()->where('currency_id', \request('currency'))->limit(1)->first();
                     $newReceiverBalance = $receiverWallet->balances()->where('currency_id', \request('currency'))->limit(1)->first();
 
                     /*500*/

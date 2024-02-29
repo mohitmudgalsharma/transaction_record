@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="/wallets/create" class="btn btn-primary">Create Wallet</a>
+        <!-- <a href="/wallets/create" class="btn btn-primary">Create Wallet</a> -->
         @foreach($walletsWitBalance as $walletAndBalance)
             {{--            @dd($walletAndBalance)--}}
             <a href="/records/{{$walletAndBalance['wallet']->id}}" class="btn">

@@ -4,9 +4,29 @@
     <div class="container">
    
 
-
-        <a href="{{ route('newrecord', ['wallet' => $wallet->id]) }}" class="btn btn-primary">New Transaction</a> 
+    <div class="row">
+<div class="col-md-6" style="margin-top:-10px;">
+    <!-- <h3 style="margin-top:20px;text-align:left;">Add Raw Material to Inventory</h3> -->
+    <a href="{{ route('newrecord', ['wallet' => $wallet->id]) }}" class="btn btn-primary">New Transaction</a> 
        <!-- total amount -->
+        @php $isBalanceDisplayed = false; @endphp
+</div>
+    <div class="col-md-6">
+                <div id="totalBox" style="float:right;">
+                @foreach ($records as $record)
+    @if (!$isBalanceDisplayed)
+        <p><b>Total Money :<b> {{ $record->currency->pfx_symbol }} {{ $record->balance->value }}</p>
+        @php $isBalanceDisplayed = true; @endphp
+    @endif
+@endforeach
+                </div>
+            </div>
+</div>
+
+
+
+        <!-- <a href="{{ route('newrecord', ['wallet' => $wallet->id]) }}" class="btn btn-primary">New Transaction</a> 
+       
         @php $isBalanceDisplayed = false; @endphp
 
 @foreach ($records as $record)
@@ -14,7 +34,7 @@
         <p>Total Money : {{ $record->currency->pfx_symbol }} {{ $record->balance->value }}</p>
         @php $isBalanceDisplayed = true; @endphp
     @endif
-@endforeach
+@endforeach -->
        <!-- total amount end -->
 
 @foreach ($records as $record)
@@ -23,7 +43,8 @@
                   border-radius: 10px">
                 <span>
     @if ($record->currency)
-    {{$record->type}} -   {{ $record->currency->pfx_symbol }} {{ $record->amount }} {{ $record->currency->sfx_symbol }} {{ $record->description }} Date :{{ $record->date }}
+    {{$record->type}} -   {{ $record->currency->pfx_symbol }} {{ $record->amount }} &nbsp;&nbsp; Transactor : {{ $record->description }} &nbsp;&nbsp; Date : {{ date('Y-m-d', strtotime($record->date)) }}
+
     @else
         Currency Not Available
     @endif
@@ -31,6 +52,10 @@
 <div>
                     <a href="{{ route('editRecord', ['wallet' => $wallet->id, 'record' => $record->id]) }}"
                         class="btn me-2 btn-warning">Edit</a>
+
+                   
+
+
                     <form action="{{ route('deleteRecord', ['wallet' => $wallet->id, 'record' => $record->id]) }}"
                         style="display: inline;" method="post">
                         @csrf
