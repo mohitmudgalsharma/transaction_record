@@ -5,6 +5,7 @@ use App\Http\Controllers\RecordController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,3 +67,6 @@ Route::get('/products/create', [ProductController::class, 'create'])->name('prod
 
 // Store the product data
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
+// Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create');
+Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchase.store');

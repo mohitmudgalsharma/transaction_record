@@ -18,6 +18,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
     Add Product
 </button>
+<a href="{{ route('purchase.index') }}" class="btn btn-primary">Purchase</a>
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
