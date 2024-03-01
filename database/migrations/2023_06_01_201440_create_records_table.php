@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('balance_id');
             $table->unsignedBigInteger('budget_id')->nullable();
 
-
+            $table->text('comment')->nullable();
             $table->foreign('wallet_id')->references('id')
                 ->on('wallets')
                 ->cascadeOnUpdate()

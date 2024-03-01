@@ -22,7 +22,8 @@ class Record extends Model
         'category_id',
         'wallet_id',
         'currency_id',
-        'date'
+        'date',
+        'comment'
     ];
 
     protected $casts = [

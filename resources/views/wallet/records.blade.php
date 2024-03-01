@@ -51,7 +51,7 @@
 </span>
 <div>
                     <a href="{{ route('editRecord', ['wallet' => $wallet->id, 'record' => $record->id]) }}"
-                        class="btn me-2 btn-warning">Edit</a>
+                        class="btn me-2 btn-warning">View</a>
 
                    
 

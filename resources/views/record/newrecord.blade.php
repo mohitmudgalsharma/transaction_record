@@ -46,6 +46,26 @@
                     @enderror
                 </div>
             </div>
+
+
+            <div class="row mb-3">
+                <label for="comment" class="col-md-4 col-form-label text-md-end">{{ __('Comment') }}</label>
+
+                <div class="col-md-6">
+                    <textarea id="comment" class="form-control @error('comment') is-invalid @enderror"
+                              name="comment">
+                        {{ old('comment') }}
+                    </textarea>
+
+                    @error('comment')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
+            </div>
+
+
             <div class="row mb-3">
                 <label for="balance" class="col-md-4 col-form-label text-md-end">{{ __('Currency') }}</label>
                 <div class="col-md-6">
@@ -119,6 +139,25 @@
                     @enderror
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <label for="comment" class="col-md-4 col-form-label text-md-end">{{ __('Comment') }}</label>
+
+                <div class="col-md-6">
+                    <textarea id="comment" class="form-control @error('comment') is-invalid @enderror"
+                              name="comment">
+                        {{ old('comment') }}
+                    </textarea>
+
+                    @error('comment')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
+            </div>
+
+
             <div class="row mb-3">
                 <label for="balance" class="col-md-4 col-form-label text-md-end">{{ __('Currency') }}</label>
                 <div class="col-md-6">

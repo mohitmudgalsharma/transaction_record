@@ -39,6 +39,20 @@
             </div>
 
             <div class="row mb-3">
+                <label for="comment" class="col-md-4 col-form-label text-md-end">{{ __('Comment') }}</label>
+                <div class="col-md-6">
+                    <textarea id="comment" class="form-control @error('comment') is-invalid @enderror" name="comment">{{ $record->comment }}</textarea>
+                    @error('comment')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+
+
+            <div class="row mb-3">
                 <label for="balance" class="col-md-4 col-form-label text-md-end">{{ __('Currency') }}</label>
                 <div class="col-md-6">
                     <select name="balance" id="balance" class="form-control">
@@ -69,13 +83,13 @@
                 </div>
             </div>
 
-            <div class="row mb-0">
+            {{--<div class="row mb-0">
                 <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">
-                        {{ __('Update Record') }}
+                    {{ __('Update Record') }}
                     </button>
                 </div>
-            </div>
+            </div>--}}
         </form>
     </div>
 

@@ -44,6 +44,7 @@ class RecordController extends Controller
             $record = new Record([
                 'amount' => \request('amount'),
                 'description' => \request('description'),
+                'comment' => \request('comment'),
                 'type' => 'Expense',
                 'balance_id' => \request('balance'),
                 'category_id' => \request('category'),
