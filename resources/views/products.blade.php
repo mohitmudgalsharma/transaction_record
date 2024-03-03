@@ -19,6 +19,7 @@
     Add Product
 </button>
 <a href="{{ route('purchase.index') }}" class="btn btn-primary">Purchase</a>
+<a href="{{ route('stock.index') }}" class="btn btn-primary">Stock</a>
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

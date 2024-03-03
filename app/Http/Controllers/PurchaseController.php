@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Purchase;
 use App\Models\Product;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -12,9 +13,10 @@ class PurchaseController extends Controller
      */
     public function index()
     {
+        $vendors = Vendor::all();
         $products = Product::all();
         $purchases = Purchase::all(); // Fetch all purchases for display
-        return view('purchase', compact('products', 'purchases'));
+        return view('purchase', compact('products', 'purchases','vendors'));
         
         //
         // $products = Product::all();

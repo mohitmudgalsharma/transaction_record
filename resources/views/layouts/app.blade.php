@@ -34,6 +34,9 @@
                     <ul class="navbar-nav me-auto">
                     <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
                         <li><a class="nav-item" href="/products" style="text-decoration:none;color:black;font-weight:600;font-size:18px;">{{ __('Products') }}</a></li>
+                        <li><a class="nav-item" href="/purchase" style="text-decoration:none;color:black;font-weight:600;font-size:18px;margin-left:25px;">{{ __('Purchase') }}</a></li>
+                        <li><a class="nav-item" href="/sales" style="text-decoration:none;color:black;font-weight:600;font-size:18px;margin-left:25px;">{{ __('Sales') }}</a></li>
+                        <li><a class="nav-item" href="/stock" style="text-decoration:none;color:black;font-weight:600;font-size:18px;margin-left:25px;">{{ __('Stock') }}</a></li>
                         <li><a class="nav-item" href="/wallets" style="text-decoration:none;color:black;font-weight:600;font-size:18px;margin-left:25px;">{{ __('Petty Cash') }}</a></li>
                    
                     </ul>

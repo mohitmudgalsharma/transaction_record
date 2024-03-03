@@ -7,6 +7,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">
     Purchase
 </button>
+<a href="{{ route('vendors.index') }}" class="btn btn-primary">Vendors</a>
 
 <div class="modal fade" id="addPurchaseModal" tabindex="-1" aria-labelledby="addPurchaseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -70,10 +71,19 @@
             <input type="text" name="total_cost" id="total_cost" class="form-control" readonly>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="vendor_name">Name of Vendor:</label>
             <input type="text" name="vendor_name" id="vendor_name" class="form-control">
-        </div>
+        </div> -->
+        <div class="form-group">
+                    <label for="vendor_name">Vendor Name:</label>
+                    <select name="vendor_name" id="vendor_name" class="form-control">
+                        <option value="">Select Vendor</option>
+                        @foreach($vendors as $vendor)
+                            <option value="{{ $vendor->name }}">{{ $vendor->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
 </div>

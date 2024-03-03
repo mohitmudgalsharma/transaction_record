@@ -5,20 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Purchase extends Model
+class Sale extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'product_id', 'date_of_purchase', 'purchased_qty', 'rate_per_meter', 'total_cost', 'vendor_name'
+        'product_id',
+        // 'vendor',
+        'total_qty',
+        'qty_sold',
+        'selling_price',
+        'date_sold',
+        'sold_to'
     ];
+
+    protected $dates = ['date_sold'];
 
     public function product()
     {
         return $this->belongsTo(Product::class);
-    }
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class, 'vendor_name', 'name');
     }
 }

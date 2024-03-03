@@ -5,7 +5,10 @@ use App\Http\Controllers\RecordController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -70,3 +73,13 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
 // Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create');
 Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchase.store');
+
+Route::get('/stock', [StockController::class, 'index'])->name('stock.index');
+
+
+Route::get('/vendors/create', [VendorController::class, 'create'])->name('vendors.create');
+Route::post('/vendors', [VendorController::class, 'store'])->name('vendors.store');
+Route::get('/vendors', [VendorController::class, 'index'])->name('vendors.index');
+
+Route::get('/sales', [SaleController::class, 'create'])->name('sales.create');
+Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
